@@ -1,0 +1,14 @@
+{
+  "name": "hotel-booking-load-test",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Artillery load testing for a Hotel Booking System API",
+  "scripts": {
+    "load-test": "artillery run tests/load-test.yml",
+    "load-test:report": "artillery run --output report.json tests/load-test.yml",
+    "report:html": "artillery report report.json"
+  },
+  "devDependencies": {
+    "artillery": "^2.0.0"
+  }
+}

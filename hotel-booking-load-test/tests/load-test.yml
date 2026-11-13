@@ -1,0 +1,16 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    # Starts 1 new virtual user per second for 60 seconds (~60 users started).
+    - duration: 60
+      arrivalRate: 1
+      name: "60 users over one minute"
+  defaults:
+    headers:
+      Accept: "application/json"
+
+scenarios:
+  - name: "Browse hotel rooms"
+    flow:
+      - get:
+          url: "/api/rooms"
