@@ -1,0 +1,27 @@
+config:
+  target: "{{ $processEnvironment.TARGET_URL }}"
+  phases:
+    - duration: 60
+      arrivalRate: 1
+      name: "Baseline - 60 new virtual users over one minute"
+    - duration: 60
+      arrivalRate: 2
+      name: "Higher load - 120 new virtual users over one minute"
+  defaults:
+    headers:
+      Accept: "application/json"
+
+scenarios:
+  - name: "Browse rooms"
+    weight: 7
+    flow:
+      - get:
+          url: "/api/rooms"
+      - think: 1
+
+  - name: "Check booking list endpoint"
+    weight: 3
+    flow:
+      - get:
+          url: "/api/bookings"
+      - think: 1

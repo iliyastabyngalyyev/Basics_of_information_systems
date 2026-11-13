@@ -1,0 +1,28 @@
+config:
+  target: "{{ $processEnvironment.TARGET_URL }}"
+  phases:
+    - duration: 60
+      arrivalRate: 1
+      name: "Login load - 60 arrivals per minute"
+  payload:
+    path: "data/users.csv"
+    fields:
+      - "email"
+      - "password"
+    order: sequence
+    skipHeader: true
+  defaults:
+    headers:
+      Content-Type: "application/json"
+      Accept: "application/json"
+
+scenarios:
+  - name: "User login"
+    flow:
+      - post:
+          url: "/api/auth/login"
+          json:
+            email: "{{ email }}"
+            password: "{{ password }}"
+          expect:
+            - statusCode: [200, 201, 400, 401]

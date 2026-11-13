@@ -1,0 +1,18 @@
+{
+  "name": "hotel-booking-load-test-advanced",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Advanced Artillery load testing suite for Hotel Booking System",
+  "scripts": {
+    "test:rooms": "artillery run tests/rooms-load.yml",
+    "test:auth": "artillery run tests/auth-load.yml",
+    "test:booking": "artillery run tests/booking-load.yml",
+    "test:full": "artillery run tests/full-load.yml",
+    "test:report": "artillery run --output reports/load-test.json tests/full-load.yml",
+    "report:html": "artillery report reports/load-test.json",
+    "check:target": "node scripts/check-target.js"
+  },
+  "devDependencies": {
+    "artillery": "^2.0.0"
+  }
+}

@@ -1,0 +1,21 @@
+config:
+  target: "{{ $processEnvironment.TARGET_URL }}"
+  phases:
+    # Starts 1 new virtual user each second for 60 seconds (~60 arrivals).
+    - duration: 60
+      arrivalRate: 1
+      name: "60 arrivals over one minute"
+  defaults:
+    headers:
+      Accept: "application/json"
+
+scenarios:
+  - name: "Browse available rooms"
+    flow:
+      - get:
+          url: "/api/rooms"
+          capture:
+            - json: "$[0].id"
+              as: "firstRoomId"
+              if: "firstRoomId"
+      - think: 1

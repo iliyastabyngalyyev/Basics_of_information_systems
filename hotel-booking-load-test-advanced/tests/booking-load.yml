@@ -1,0 +1,19 @@
+config:
+  target: "{{ $processEnvironment.TARGET_URL }}"
+  phases:
+    - duration: 60
+      arrivalRate: 1
+      name: "Booking API load - 60 arrivals per minute"
+  defaults:
+    headers:
+      Content-Type: "application/json"
+      Accept: "application/json"
+
+scenarios:
+  - name: "Check rooms and booking endpoint"
+    flow:
+      - get:
+          url: "/api/rooms"
+      # This tests endpoint availability only. A real booking POST needs
+      # a valid test token, room ID, user ID, and dates for your API schema.
+      - think: 1
